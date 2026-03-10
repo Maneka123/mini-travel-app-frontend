@@ -1,15 +1,27 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 function Header() {
+  const token = localStorage.getItem("token");
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+  };
+
   return (
-    <div style={{ padding: "15px", borderBottom: "1px solid gray" }}>
-
-      <Link to="/">Home</Link> | 
-      <Link to="/register"> Register</Link> | 
-      <Link to="/login"> Login</Link>
-
-    </div>
+    <header style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>
+      <Link to="/">Home</Link> |{" "}
+      {token ? (
+        <>
+          <Link to="/create">Create Listing</Link> |{" "}
+          <button onClick={handleLogout}>Logout</button>
+        </>
+      ) : (
+        <>
+          <Link to="/login">Login</Link> | <Link to="/register">Register</Link>
+        </>
+      )}
+    </header>
   );
 }
 
