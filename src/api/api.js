@@ -8,7 +8,8 @@ export const loginUser = (data) => axios.post(`${API_BASE}/login`, data, { withC
 export const logoutUser = () => axios.post(`${API_BASE}/logout`, {}, { withCredentials: true });
 
 // Listings
-export const getAllListings = () => axios.get(`${API_BASE}/getListings`);
+//export const getAllListings = () => axios.get(`${API_BASE}/getListings`);
+export const getAllListings = () => axios.get(`${API_BASE}/listings`);
 export const getMyListings = () => axios.get(`${API_BASE}/getListings?mine=true`);
 export const getListingDetail = (id) => axios.get(`${API_BASE}/getListing?id=${id}`);
 export const createListing = (data) => axios.post(`${API_BASE}/createListing`, data, { withCredentials: true });
