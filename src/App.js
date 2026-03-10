@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Listings from "./pages/Listings";
-import CreateListing from "./pages/CreateListing";
+import CreateListing from "./pages/CreateMyList";
 
 function App() {
   return (
