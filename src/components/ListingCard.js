@@ -1,11 +1,23 @@
 import React from "react";
 
-export default function ListingCard({ listing }) {
+function ListingCard({ listing }) {
+
   return (
-    <div style={{ border: "1px solid #ccc", margin: "10px", padding: "10px" }}>
-      <h2>{listing.title}</h2>
+    <div style={{
+      border: "1px solid #ddd",
+      padding: "15px",
+      margin: "15px 0",
+      borderRadius: "8px"
+    }}>
+
+      <h3>{listing.title}</h3>
+
       <p>{listing.description}</p>
-      <p>Price: ${listing.price}</p>
+
+      {listing.price && <p><strong>Price:</strong> ${listing.price}</p>}
+
     </div>
   );
 }
+
+export default ListingCard;
