@@ -9,21 +9,17 @@ import Listings from "./pages/Listings";
 function App() {
   return (
     <Router>
-
+      {/* Header always visible */}
       <Header />
 
-      <div className="App">
-
+      {/* Main content */}
+      <main className="App">
         <Routes>
-
           <Route path="/" element={<Listings />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-
         </Routes>
-
-      </div>
-
+      </main>
     </Router>
   );
 }

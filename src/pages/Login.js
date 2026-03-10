@@ -3,7 +3,7 @@ import { loginUser } from "../api/api";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const navigate = useNavigate(); // ✅ React Router navigation
+  const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
   const [message, setMessage] = useState("");
 
@@ -16,11 +16,12 @@ function Login() {
 
     try {
       const res = await loginUser(form);
+      // Save JWT token
+      localStorage.setItem("token", res.data.token);
       setMessage("Login successful!");
-      console.log(res.data);
 
-      // ✅ Redirect to listings page
-      navigate("/"); 
+      // Redirect to listings page
+      navigate("/");
     } catch (err) {
       setMessage(err.response?.data?.error || "Login failed");
     }
@@ -31,22 +32,10 @@ function Login() {
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            onChange={handleChange}
-            required
-          />
+          <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
         </div>
         <div>
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={handleChange}
-            required
-          />
+          <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
         </div>
         <button type="submit">Login</button>
       </form>

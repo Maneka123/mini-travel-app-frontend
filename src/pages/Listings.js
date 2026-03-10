@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllListings } from "../api/api"; // make sure this exists
-import ListingCard from "../components/ListingCard";
+import { getAllListings } from "../api/api";
 
 function Listings() {
   const [listings, setListings] = useState([]);
@@ -10,14 +9,14 @@ function Listings() {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const res = await getAllListings();
-        console.log("API Response:", res.data); // ✅ Check data in console
+        const token = localStorage.getItem("token");
+        if (!token) throw new Error("Not logged in");
 
-        // Make sure to use the `listings` property from backend
+        const res = await getAllListings(token);
         setListings(res.data.listings || []);
       } catch (err) {
         console.error("Error fetching listings:", err);
-        setError("Failed to load listings");
+        setError("You must be logged in to see listings");
       } finally {
         setLoading(false);
       }
@@ -32,12 +31,15 @@ function Listings() {
   return (
     <div style={{ padding: "20px" }}>
       <h2>All Travel Experiences</h2>
-
       {listings.length === 0 ? (
         <p>No listings found</p>
       ) : (
         listings.map((listing) => (
-          <ListingCard key={listing._id} listing={listing} />
+          <div key={listing._id} style={{ border: "1px solid #ddd", margin: "10px 0", padding: "10px", borderRadius: "8px" }}>
+            <h3>{listing.title}</h3>
+            <p>{listing.description}</p>
+            {listing.price && <p><strong>Price:</strong> ${listing.price}</p>}
+          </div>
         ))
       )}
     </div>
