@@ -9,7 +9,7 @@ function Listings() {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("token"); // ✅ get token
         if (!token) throw new Error("Not logged in");
 
         const res = await getAllListings(token);
@@ -35,7 +35,7 @@ function Listings() {
         <p>No listings found</p>
       ) : (
         listings.map((listing) => (
-          <div key={listing._id} style={{ border: "1px solid #ddd", margin: "10px 0", padding: "10px", borderRadius: "8px" }}>
+          <div key={listing._id} style={{ border: "1px solid #ddd", padding: "10px", margin: "10px 0", borderRadius: "8px" }}>
             <h3>{listing.title}</h3>
             <p>{listing.description}</p>
             {listing.price && <p><strong>Price:</strong> ${listing.price}</p>}
